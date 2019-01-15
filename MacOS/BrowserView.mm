@@ -21,6 +21,7 @@
     self = [super initWithFrame:frameRect];
     
     process = new FourtyTwo::Process();
+    process->setViewportSize(frameRect.size.width, frameRect.size.height);
     
     return self;
 }

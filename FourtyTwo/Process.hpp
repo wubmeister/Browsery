@@ -16,7 +16,7 @@ namespace FourtyTwo {
     typedef struct _PixelData {
         int width;
         int height;
-        u_int8_t *pixels;
+        u_int8_t *pixels = 0;
     } PixelData;
     
     class Process {
@@ -24,6 +24,7 @@ namespace FourtyTwo {
         Process();
         ~Process();
         PixelData getPixelData();
+        void setViewportSize(int width, int height);
         
     private:
         void allocatePixelData(int width, int height, PixelData *pd);

@@ -16,8 +16,6 @@ namespace FourtyTwo {
     
     Process::Process()
     {
-        printf("Hello process");
-        allocatePixelData(100, 100, &mPixelData);
     }
     
     Process::~Process()
@@ -28,6 +26,12 @@ namespace FourtyTwo {
     PixelData Process::getPixelData()
     {
         return mPixelData;
+    }
+    
+    void Process::setViewportSize(int width, int height)
+    {
+        freePixelData(&mPixelData);
+        allocatePixelData(width, height, &mPixelData);
     }
     
     void Process::allocatePixelData(int width, int height, PixelData *pd)
