@@ -11,7 +11,7 @@
 
 namespace FourtyTwo {
     
-    typedef unsigned char *u_int8_t;
+    typedef unsigned char u_int8_t;
     
     typedef struct _PixelData {
         int width;
@@ -23,7 +23,7 @@ namespace FourtyTwo {
     public:
         Process();
         ~Process();
-        PixelData getPixelData();
+        void getPixelData(PixelData *pd);
         void setViewportSize(int width, int height);
         
     private:
