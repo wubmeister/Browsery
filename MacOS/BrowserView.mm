@@ -36,7 +36,8 @@
     // Drawing code here.
     NSLog(@"Drawing the rect");
     
-    FourtyTwo::PixelData pixelData = process->getPixelData();
+    FourtyTwo::PixelData pixelData;
+    process->getPixelData(&pixelData);
     
     CGContextRef curr = [[NSGraphicsContext currentContext] CGContext];
     

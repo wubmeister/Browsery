@@ -58,9 +58,15 @@ namespace FourtyTwo {
 		for (y = 0; y < height; y++) {
 			for (x = 0; x < width; x++) {
 				offset = y * scanlineSize + x * 3;
+#if defined(_WIN64) || defined(_WIN32)
 				pd->pixels[offset] = 0xFF;
 				pd->pixels[offset+1] = 0x99;
 				pd->pixels[offset+2] = 0x00;
+#else
+                pd->pixels[offset] = 0x00;
+                pd->pixels[offset+1] = 0x99;
+                pd->pixels[offset+2] = 0xFF;
+#endif
 			}
 		}
     }
