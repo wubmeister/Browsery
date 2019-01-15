@@ -12,6 +12,9 @@
 		E1A13F8D21EE5C4E00BCE925 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1A13F8B21EE5C4E00BCE925 /* MainMenu.xib */; };
 		E1A13F9021EE5C4E00BCE925 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A13F8F21EE5C4E00BCE925 /* main.m */; };
 		E1A13F9821EE619D00BCE925 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = E1A13F9721EE619D00BCE925 /* LICENSE */; };
+		E1A13F9B21EE671B00BCE925 /* BrowserWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A13F9A21EE671B00BCE925 /* BrowserWindow.m */; };
+		E1A13F9E21EE6AD500BCE925 /* BrowserView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E1A13F9D21EE6AD500BCE925 /* BrowserView.mm */; };
+		E1A13FA221EE6B9E00BCE925 /* Process.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1A13FA021EE6B9E00BCE925 /* Process.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,12 @@
 		E1A13F8F21EE5C4E00BCE925 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E1A13F9121EE5C4E00BCE925 /* Browsery.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Browsery.entitlements; sourceTree = "<group>"; };
 		E1A13F9721EE619D00BCE925 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		E1A13F9921EE671B00BCE925 /* BrowserWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrowserWindow.h; sourceTree = "<group>"; };
+		E1A13F9A21EE671B00BCE925 /* BrowserWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrowserWindow.m; sourceTree = "<group>"; };
+		E1A13F9C21EE6AD500BCE925 /* BrowserView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrowserView.h; sourceTree = "<group>"; };
+		E1A13F9D21EE6AD500BCE925 /* BrowserView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BrowserView.mm; sourceTree = "<group>"; };
+		E1A13FA021EE6B9E00BCE925 /* Process.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Process.cpp; sourceTree = "<group>"; };
+		E1A13FA121EE6B9E00BCE925 /* Process.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Process.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +49,7 @@
 		E1A13F7A21EE5C4D00BCE925 = {
 			isa = PBXGroup;
 			children = (
+				E1A13F9F21EE6B8500BCE925 /* FourtyTwo */,
 				E1A13F9721EE619D00BCE925 /* LICENSE */,
 				E1A13F8521EE5C4D00BCE925 /* MacOS */,
 				E1A13F8421EE5C4D00BCE925 /* Products */,
@@ -64,8 +74,21 @@
 				E1A13F8E21EE5C4E00BCE925 /* Info.plist */,
 				E1A13F8F21EE5C4E00BCE925 /* main.m */,
 				E1A13F9121EE5C4E00BCE925 /* Browsery.entitlements */,
+				E1A13F9921EE671B00BCE925 /* BrowserWindow.h */,
+				E1A13F9A21EE671B00BCE925 /* BrowserWindow.m */,
+				E1A13F9C21EE6AD500BCE925 /* BrowserView.h */,
+				E1A13F9D21EE6AD500BCE925 /* BrowserView.mm */,
 			);
 			path = MacOS;
+			sourceTree = "<group>";
+		};
+		E1A13F9F21EE6B8500BCE925 /* FourtyTwo */ = {
+			isa = PBXGroup;
+			children = (
+				E1A13FA021EE6B9E00BCE925 /* Process.cpp */,
+				E1A13FA121EE6B9E00BCE925 /* Process.hpp */,
+			);
+			path = FourtyTwo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,7 +162,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1A13F9021EE5C4E00BCE925 /* main.m in Sources */,
+				E1A13FA221EE6B9E00BCE925 /* Process.cpp in Sources */,
+				E1A13F9B21EE671B00BCE925 /* BrowserWindow.m in Sources */,
 				E1A13F8821EE5C4D00BCE925 /* AppDelegate.m in Sources */,
+				E1A13F9E21EE6AD500BCE925 /* BrowserView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
