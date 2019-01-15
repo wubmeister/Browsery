@@ -11,6 +11,7 @@
 		E1A13F8A21EE5C4E00BCE925 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1A13F8921EE5C4E00BCE925 /* Assets.xcassets */; };
 		E1A13F8D21EE5C4E00BCE925 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1A13F8B21EE5C4E00BCE925 /* MainMenu.xib */; };
 		E1A13F9021EE5C4E00BCE925 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A13F8F21EE5C4E00BCE925 /* main.m */; };
+		E1A13F9821EE619D00BCE925 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = E1A13F9721EE619D00BCE925 /* LICENSE */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		E1A13F8E21EE5C4E00BCE925 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1A13F8F21EE5C4E00BCE925 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E1A13F9121EE5C4E00BCE925 /* Browsery.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Browsery.entitlements; sourceTree = "<group>"; };
+		E1A13F9721EE619D00BCE925 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,7 +40,8 @@
 		E1A13F7A21EE5C4D00BCE925 = {
 			isa = PBXGroup;
 			children = (
-				E1A13F8521EE5C4D00BCE925 /* Browsery */,
+				E1A13F9721EE619D00BCE925 /* LICENSE */,
+				E1A13F8521EE5C4D00BCE925 /* MacOS */,
 				E1A13F8421EE5C4D00BCE925 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -51,7 +54,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E1A13F8521EE5C4D00BCE925 /* Browsery */ = {
+		E1A13F8521EE5C4D00BCE925 /* MacOS */ = {
 			isa = PBXGroup;
 			children = (
 				E1A13F8621EE5C4D00BCE925 /* AppDelegate.h */,
@@ -122,6 +125,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1A13F9821EE619D00BCE925 /* LICENSE in Resources */,
 				E1A13F8A21EE5C4E00BCE925 /* Assets.xcassets in Resources */,
 				E1A13F8D21EE5C4E00BCE925 /* MainMenu.xib in Resources */,
 			);
