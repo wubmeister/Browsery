@@ -37,3 +37,6 @@
 /.vs/
 /x64/
 /Windows/x64/
+
+# Linux
+/Linux/Release
