@@ -1,38 +1,10 @@
 #include <Windows.h>
 #include "../FourtyTwo/Process.hpp"
+#include <ShellScalingApi.h>
 
 #define BROWSERY_WIDOWCLASS "BrowseryWindowClass"
 
 static FourtyTwo::Process *gProcess;
-
-/*void OnPaint(HWND hWnd)
-{
-	PAINTSTRUCT ps;
-	WINDOWINFO wi;
-	FourtyTwo::PixelData pixelData;
-	BITMAPINFO bi;
-
-	gProcess->getPixelData(&pixelData);
-
-	if (!pixelData.pixels) {
-		return;
-	}
-
-	ZeroMemory(&(bi.bmiHeader), sizeof(bi.bmiHeader));
-	bi.bmiHeader.biSize = sizeof(bi.bmiHeader);
-	bi.bmiHeader.biWidth = pixelData.width;
-	bi.bmiHeader.biHeight = pixelData.height;
-	bi.bmiHeader.biPlanes = 1;
-	bi.bmiHeader.biBitCount = 24;
-	bi.bmiHeader.biCompression = BI_RGB;
-
-	BeginPaint(hWnd, &ps);
-
-	StretchDIBits(ps.hdc, 0, 0, pixelData.width, pixelData.height, 0, 0, pixelData.width, pixelData.height, pixelData.pixels, &bi, DIB_RGB_COLORS, SRCCOPY);
-
-	EndPaint(hWnd, &ps);
-
-}*/
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -40,6 +12,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	PAINTSTRUCT ps;
 	FourtyTwo::PixelData pixelData;
 	BITMAPINFO bi;
+	UINT dpiX, dpiY;
 
 	switch (msg)
 	{
@@ -77,7 +50,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	case WM_SIZE:
 		OutputDebugString("Resize!");
 		GetWindowInfo(hWnd, &wi);
-		gProcess->setViewportSize(wi.rcClient.right - wi.rcClient.left, wi.rcClient.bottom - wi.rcClient.top);
+		GetDpiForMonitor(MonitorFromWindow(hWnd, MONITOR_DEFAULTTONEAREST), MDT_EFFECTIVE_DPI, &dpiX, &dpiY);
+		gProcess->setViewportSize(wi.rcClient.right - wi.rcClient.left, wi.rcClient.bottom - wi.rcClient.top, dpiX / 96);
 		break;
 
 	default:
@@ -91,8 +65,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine, 
 	WNDCLASSEX wc;
 	HWND hWnd;
 	MSG msg;
+	UINT dpiX, dpiY;
 
 	ZeroMemory(&wc, sizeof(WNDCLASSEX));
+
+	SetProcessDpiAwareness(PROCESS_SYSTEM_DPI_AWARE);
 
 	wc.cbSize = sizeof(WNDCLASSEX);
 	wc.lpfnWndProc = WndProc;
@@ -109,6 +86,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine, 
 		return 0;
 	}
 
+	POINT pt = { 0, 0 };
+	GetDpiForMonitor(MonitorFromPoint(pt, MONITOR_DEFAULTTOPRIMARY), MDT_EFFECTIVE_DPI, &dpiX, &dpiY);
+
 	hWnd = CreateWindowEx(
 		0,
 		BROWSERY_WIDOWCLASS,
@@ -116,8 +96,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine, 
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
-		640,
-		480,
+		640 * dpiX / 96,
+		480 * dpiY / 96,
 		NULL,
 		NULL,
 		hInstance,

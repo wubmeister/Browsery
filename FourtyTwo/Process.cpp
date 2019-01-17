@@ -21,7 +21,7 @@ namespace FourtyTwo {
         char fontfile[] = "/Library/Fonts/Times New Roman.ttf";
 #endif
 #if defined(_WIN64) || defined(_WIN32)
-        char fontfile[] = "C:\\Windows\\Fonts\\Arial.ttf";
+        char fontfile[] = "C:\\Windows\\Fonts\\Times.ttf";
 #endif
         
         error = FT_Init_FreeType(&mLibrary);
@@ -105,8 +105,12 @@ namespace FourtyTwo {
             cbuf = (u_int8_t*)slot->bitmap.buffer;
             for (yy = 0; yy < slot->bitmap.rows; yy++) {
                 for (xx = 0; xx < slot->bitmap.width; xx++) {
+#if defined(_WIN64) || defined(_WIN32)
+					offset = (height - (y + yy - slot->bitmap_top)) * scanlineSize + (x + xx + slot->bitmap_left) * 3;
+#else
                     offset = (y + yy - slot->bitmap_top) * scanlineSize + (x + xx + slot->bitmap_left) * 3;
-                    pixel = cbuf[yy*slot->bitmap.pitch+xx];
+#endif
+					pixel = cbuf[yy*slot->bitmap.pitch + xx];
                     comp = ((255 - pixel) * pd->pixels[offset] + pixel * 255) >> 8;
                     pd->pixels[offset] = comp;
                     comp = ((255 - pixel) * pd->pixels[offset+1] + pixel * 255) >> 8;
