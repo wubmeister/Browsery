@@ -20,8 +20,10 @@
 - (id)initWithFrame:(NSRect)frameRect {
     self = [super initWithFrame:frameRect];
     
+    CGFloat scale = [[NSScreen mainScreen] backingScaleFactor];
+    printf("Scale: %f\n", scale);
     process = new FourtyTwo::Process();
-    process->setViewportSize(frameRect.size.width, frameRect.size.height);
+    process->setViewportSize(frameRect.size.width, frameRect.size.height, scale);
     
     return self;
 }
@@ -44,7 +46,7 @@
     CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, pixelData.pixels, pixelData.height * pixelData.width * 3, NULL);
     CGImageRef image = CGImageCreate(pixelData.width, pixelData.height, 8, 24, pixelData.width * 3, CGColorSpaceCreateDeviceRGB(), 0, provider, NULL, FALSE, kCGRenderingIntentDefault);
     
-    CGContextDrawImage(curr, CGRectMake(0, self.bounds.size.height - pixelData.height, pixelData.width, pixelData.height), image);
+    CGContextDrawTiledImage(curr, [self bounds], image);
     
     CGImageRelease(image);
     CGDataProviderRelease(provider);
