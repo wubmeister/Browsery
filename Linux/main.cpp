@@ -2,11 +2,13 @@
 #include <gtk/gtk.h>
 
 static FourtyTwo::Process *gProcess;
+static gint gScalingFactor;
 
 static gboolean draw_cb(GtkWidget *widget, cairo_t *cr, gpointer data)
 {
     GdkPixbuf *pixBuf;
     FourtyTwo::PixelData pixelData;
+    cairo_surface_t *surface;
 
     gProcess->getPixelData(&pixelData);
 
@@ -16,8 +18,11 @@ static gboolean draw_cb(GtkWidget *widget, cairo_t *cr, gpointer data)
     }
 
     pixBuf = gdk_pixbuf_new_from_data(pixelData.pixels, GDK_COLORSPACE_RGB, FALSE, 8, pixelData.width, pixelData.height, pixelData.width * 3, NULL, NULL);
-    gdk_cairo_set_source_pixbuf(cr, pixBuf, 0, 0);
+    surface = gdk_cairo_surface_create_from_pixbuf(pixBuf, gScalingFactor, NULL);
+    cairo_set_source_surface(cr, surface, 0, 0);
+
     cairo_paint(cr);
+    g_object_unref(pixBuf);
 
     return FALSE;
 }
@@ -30,8 +35,9 @@ static gboolean resize_cb(GtkWidget *widget, GdkEvent *event, gpointer data)
     context = gtk_widget_get_style_context(widget);
     width = gtk_widget_get_allocated_width(widget);
     height = gtk_widget_get_allocated_height(widget);
+    gScalingFactor = gtk_widget_get_scale_factor(widget);
 
-    gProcess->setViewportSize(width, height);
+    gProcess->setViewportSize(width, height, gScalingFactor);
 
     return FALSE;
 }

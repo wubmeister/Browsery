@@ -13,7 +13,7 @@
 #include <string.h>
 
 namespace FourtyTwo {
-    
+
     Process::Process()
     {
         int error;
@@ -23,12 +23,15 @@ namespace FourtyTwo {
 #if defined(_WIN64) || defined(_WIN32)
         char fontfile[] = "C:\\Windows\\Fonts\\Times.ttf";
 #endif
-        
+#ifdef __linux__
+        char fontfile[] = "/usr/share/fonts/truetype/freefont/FreeSerif.ttf";
+#endif
+
         error = FT_Init_FreeType(&mLibrary);
         if (error) {
             printf("Could not init FreeType\n");
         }
-        
+
         error = FT_New_Face(mLibrary, fontfile, 0, &mFace);
         if (error == FT_Err_Unknown_File_Format) {
             printf("Invald file format\n");
@@ -37,25 +40,25 @@ namespace FourtyTwo {
             printf("Unknown error loading font\n");
         }
     }
-    
+
     Process::~Process()
     {
         FT_Done_FreeType(mLibrary);
         freePixelData(&mPixelData);
     }
-    
+
     void Process::getPixelData(PixelData *pd)
     {
         memcpy(pd, &mPixelData, sizeof(PixelData));
     }
-    
+
     void Process::setViewportSize(int width, int height, double scale)
     {
         FT_Set_Char_Size(mFace, 0, 16 * 64, 72 * scale, 72 * scale);
         freePixelData(&mPixelData);
         allocatePixelData(width * scale, height * scale, &mPixelData);
     }
-    
+
     void Process::allocatePixelData(int width, int height, PixelData *pd)
     {
 		int x, y, xx, yy, offset, scanlineSize, i;
@@ -95,7 +98,7 @@ namespace FourtyTwo {
 #endif
 			}
 		}
-        
+
         // Render hello world
         x = 101;
         y = 101;
@@ -122,7 +125,7 @@ namespace FourtyTwo {
             x += slot->advance.x >> 6;
         }
     }
-    
+
     void Process::freePixelData(PixelData *pd)
     {
         if (pd->pixels) {
@@ -130,5 +133,5 @@ namespace FourtyTwo {
             pd->pixels = NULL;
         }
     }
-    
+
 }
